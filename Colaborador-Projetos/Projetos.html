@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projack Impulse - Cadastro</title>
+
+  <!-- Fontes -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap">
+  <link rel="stylesheet" href="https://use.typekit.net/xoh7gtf.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quantico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../CSS/css_projetos/geral.css">
+  <link rel="stylesheet" href="../CSS/css_projetos/retangulo.css">
+  <link rel="stylesheet" href="../CSS/css_projetos/titulo.css">
+  <link rel="stylesheet" href="../CSS/css_projetos/barra_pesquisa.css">
+</head>
+
+<!-- CABEÇALHO -->
+<body>
+  <div class="cabecalho"> 
+    <button id="btnToggle" class="botao_opcoes">Clique aqui</button>
+  </div>
+
+
+<!-- CONTAINER DO TÍTULO E LOGO -->
+<div class="titulo-superior">
+  <h1 class="meus-projetos">Meus Projetos</h1>
+  <img src="../Imagens/imagens_projetos/Project.png" alt="Logo do Projeto" class="logo-projeto"/>
+</div>
+
+
+<!-- CONTAINER PRINCIPAL: BARRA + BOTÃO -->
+<div class="container-pesquisa">
+  <!-- BARRA DE PESQUISA -->
+  <div class="barra-pesquisa">
+    <!-- ÍCONE DO FOGUETE -->
+    <img src="../Imagens/imagens_projetos/foguete.png" alt="Foguete" class="icone-foguete" />
+
+    <!-- CAMPO DE TEXTO -->
+    <input type="text" class="campo-pesquisa" placeholder="Buscar projeto..." />
+
+    <!-- BOTÃO DE PESQUISA -->
+    <button class="botao-pesquisa">
+      <img src="../Imagens/imagens_projetos/estrela.png" alt="Buscar" />
+    </button>
+
+  </div>
+  
+  <!-- BOTÃO PARA CRIAR PROJETO -->
+  <button class="botao-criar">
+    <img src="../Imagens/imagens_projetos/botao_novo_projeto.png" alt="Criar Projeto" />
+  </button>
+
+</div>
+<div id="retangulo" class="retangulo" style="display:none;">
+    <img src="../Imagens/imagens_projetos/Project.png" alt="Logo Projack Impulse" class="logo"/>
+    <img src="../Imagens/imagens_projetos/Bloco_com_clipe.png" class="Bloco_com_clipe"/>
+    <p class="idealizador-texto">Idealizador</p>
+
+<div class="info-items-container">
+  <div class="info-item">
+    <img src="../Imagens/imagens_projetos/icon_projetos.png" alt="Ícone Meus Projetos" class="icon"/>
+    <span>Meus Projetos</span>
+  </div>
+
+  <a href="https://seuperfil.com" class="info-item link-perfil" target="_blank" rel="noopener noreferrer">
+    <img src="../Imagens/imagens_projetos/icon_perfil.png" alt="Ícone Meu Perfil" class="icon"/>
+    <span>Meu Perfil</span>
+  </a>
+</div>
+  </div>
+
+  <!-- JavaScript externo -->
+  <script src="../JS/retangulo.js"></script>
+</body>
+</html>

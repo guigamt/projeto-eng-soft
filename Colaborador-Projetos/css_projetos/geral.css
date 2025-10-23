@@ -1,0 +1,40 @@
+/* Estiliza os elementos principais da página (body e html) */
+body, html {
+    width: 100%;                /* Usa toda a largura da tela */
+    height: 100%;               /* Usa toda a altura da tela */
+    font-family: 'Quantico', sans-serif;  /* Define a fonte principal */
+    background-color: #FBF8E0;  /* Cor de fundo da página (verde escuro) */
+    display: flex;              /* Usa flexbox para centralizar o conteúdo */
+    justify-content: center;   /* Centraliza horizontalmente */
+    align-items: center;       /* Centraliza verticalmente */
+  }
+  
+
+
+/* ===========
+   CABEÇALHO
+   =========== */
+
+
+.cabecalho {
+    position: absolute; /* Posiciona o elemento de forma absoluta em relação ao seu pai mais próximo com posição relativa */
+    width: 100%;        /* Define a largura do elemento para ocupar 100% da largura do elemento pai */
+    height: 8%;        /* Define a altura do elemento para 10% da altura do elemento pai */
+    left: 0px;          /* Posiciona o elemento na posição 0 (extremo esquerdo) dentro do pai */
+    top: 0px;           /* Posiciona o elemento no topo (posição 0) dentro do pai */
+    background: rgba(0, 50, 33, 0.84); /* Define a cor de fundo com um tom verde escuro semitransparente */
+    
+    display: flex;          /* ativa flexbox */
+    align-items: center;    /* centraliza verticalmente */
+    justify-content: flex-start; /* alinha itens no início (esquerda) */
+    padding-left: 10px;     /* espaço da borda esquerda */
+}
+
+.botao_opcoes {
+    position: relative; 
+    padding: 6px 12px;   /* Espaçamento interno: 6px em cima/baixo e 12px nas laterais */
+    font-size: 14px;     /* Define o tamanho da fonte para 14 pixels */
+    cursor: pointer;     /* Muda o cursor para uma mãozinha quando o mouse passa por cima (indica que é clicável) */
+    left: 3%;       
+}
+
