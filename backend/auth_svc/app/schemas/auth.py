@@ -12,6 +12,7 @@ class Token(SQLModel):
 class TokenPayload(SQLModel):
     sub: Optional[str] = None
     exp: Optional[int] = None
+    jti: Optional[str] = None
 
 
 class LoginRequest(SQLModel):
@@ -25,3 +26,6 @@ class RegisterRequest(SQLModel):
     full_name: Optional[str] = None
     role: Optional[str] = None
 
+
+class LogoutResponse(SQLModel):
+    detail: str = "Logged out successfully."

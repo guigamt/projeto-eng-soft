@@ -1,5 +1,7 @@
 import { Link, NavLink, Route, Routes } from "react-router-dom";
 
+import { useAuth } from "./context/AuthContext";
+import { LoginPage } from "./pages/Auth/LoginPage";
 import { ProfilePage } from "./pages/Collaborator/ProfilePage";
 import { EditProfilePage } from "./pages/Collaborator/EditProfilePage";
 import { ProjectListPage } from "./pages/Projects/ProjectListPage";
@@ -9,6 +11,22 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   isActive ? "nav-link nav-link-active" : "nav-link";
 
 export default function App() {
+  const { isAuthenticated, isLoading, user, logout } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="loading-screen">
+        <p>Carregando autenticacao...</p>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <LoginPage />;
+  }
+
+  const displayName = user?.full_name || user?.email;
+
   return (
     <div className="app-shell">
       <header className="app-header">
@@ -29,6 +47,12 @@ export default function App() {
             Minhas candidaturas
           </NavLink>
         </nav>
+        <div className="auth-status">
+          <span className="auth-identity">{displayName}</span>
+          <button type="button" className="logout-button" onClick={logout}>
+            Sair
+          </button>
+        </div>
       </header>
       <main className="app-content">
         <Routes>
@@ -41,4 +65,3 @@ export default function App() {
     </div>
   );
 }
-

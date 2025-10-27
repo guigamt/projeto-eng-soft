@@ -19,7 +19,7 @@ from sqlmodel import Session, SQLModel, create_engine
 
 from app.main import create_app
 from app.db import session as db_session
-from app.models import user  # noqa: F401
+from app.models import token, user  # noqa: F401
 
 
 @pytest.fixture(scope="module")

@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from typing import Optional
+from uuid import uuid4
 
 from fastapi import HTTPException, status
 from jose import JWTError, jwt
@@ -7,6 +8,7 @@ from passlib.context import CryptContext
 from sqlmodel import Session, select
 
 from app.core.config import settings
+from app.models.token import RevokedToken
 from app.models.user import User, UserRole
 from app.schemas.auth import TokenPayload
 from app.schemas.user import UserCreate
@@ -66,14 +68,20 @@ def create_access_token(*, subject: str, expires_delta: Optional[timedelta] = No
         if expires_delta
         else timedelta(minutes=settings.access_token_expire_minutes)
     )
-    payload = {"exp": expire, "sub": subject}
+    payload = {"exp": expire, "sub": subject, "jti": uuid4().hex}
     return jwt.encode(payload, settings.secret_key, algorithm=settings.algorithm)
 
 
 def decode_token(token: str) -> TokenPayload:
     try:
         payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
-        return TokenPayload(**payload)
+        token_payload = TokenPayload(**payload)
+        if token_payload.jti is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Token missing identifier.",
+            )
+        return token_payload
     except JWTError as exc:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -84,3 +92,33 @@ def decode_token(token: str) -> TokenPayload:
 def get_user_by_id(session: Session, user_id: int) -> Optional[User]:
     return session.get(User, user_id)
 
+
+def revoke_token(session: Session, payload: TokenPayload, *, user_id: Optional[int] = None) -> None:
+    if payload.jti is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot revoke token without identifier.",
+        )
+    if is_token_revoked(session, payload.jti, auto_purge=False):
+        return
+    expires_at = (
+        datetime.utcfromtimestamp(payload.exp)
+        if payload.exp is not None
+        else datetime.utcnow()
+    )
+    revoked = RevokedToken(jti=payload.jti, expires_at=expires_at, user_id=user_id)
+    session.add(revoked)
+    session.commit()
+
+
+def is_token_revoked(session: Session, jti: Optional[str], *, auto_purge: bool = True) -> bool:
+    if jti is None:
+        return False
+    revoked = session.get(RevokedToken, jti)
+    if not revoked:
+        return False
+    if auto_purge and revoked.expires_at < datetime.utcnow():
+        session.delete(revoked)
+        session.commit()
+        return False
+    return True

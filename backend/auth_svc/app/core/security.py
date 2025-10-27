@@ -19,6 +19,11 @@ def get_current_user(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid token payload.",
         )
+    if auth_service.is_token_revoked(session, payload.jti):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token has been revoked.",
+        )
     user = auth_service.get_user_by_id(session, int(payload.sub))
     if not user:
         raise HTTPException(
@@ -26,4 +31,3 @@ def get_current_user(
             detail="User not found.",
         )
     return user
-
