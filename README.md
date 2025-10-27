@@ -1,6 +1,6 @@
 # Plataforma de Inovação Colaborativa
 
-Este repositório reúne o MVP da plataforma de inovação colaborativa desenvolvida por **Guilherme Piragibe, Rafael Benites e Lucas Freires** como parte da disciplina de Engenharia de Software (Mackenzie 2025/2). O objetivo é conectar idealizadores e colaboradores através de uma arquitetura de microsserviços (FastAPI + SQLModel) e um frontend React/TypeScript.
+Este repositório reúne o MVP da plataforma de inovação colaborativa desenvolvida por **Guilherme Piragibe, Rafael Fernandes, Rafael Benites e Lucas Freires** como parte da disciplina de Engenharia de Software (Mackenzie 2025/2). O objetivo é conectar idealizadores e colaboradores através de uma arquitetura de microsserviços (FastAPI + SQLModel) e um frontend React/TypeScript.
 
 ---
 
